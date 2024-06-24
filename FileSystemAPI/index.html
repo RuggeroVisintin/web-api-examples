@@ -1,0 +1,43 @@
+<html>
+
+<body>
+    <!-- <script src="assets/index.js"></script> -->
+    <script>
+        async function loadScene() {
+            const scriptEl = document.createElement('script');
+            scriptEl.src = './assets/index.js';
+
+            scriptEl.onload = () => {
+                console.log('script loaded');
+
+                console.log('Spark Engine', window['spark-engine'])
+            }
+
+            document.head.appendChild(scriptEl)
+        }
+        async function getTheFile() {
+            // Open file picker and destructure the result the first handle
+
+            const img = new Image();
+
+            img.onload = async () => {
+                console.log('IMAGE', img);
+            };
+
+            img.src = window['spark-engine'].scenes[0].imageAsset;
+
+            document.body.appendChild(img)
+        }
+
+        window.onclick = async () => {
+            await loadScene();
+            await setTimeout(async () => {
+                await getTheFile()
+            }, 1000)
+
+        }
+
+    </script>
+</body>
+
+</html>
